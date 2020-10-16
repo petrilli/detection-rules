@@ -18,7 +18,7 @@ name = "Bypass UAC via Sdclt"
 risk_score = 21
 rule_id = "9b54e002-034a-47ac-9307-ad12c03fa900"
 severity = "high"
-tags = ["Elastic", "Host", "Windows", "Advanced Threat Detection", "Privilege Escalation"]
+tags = ["Elastic", "Host", "Windows", "Threat Detection", "Privilege Escalation"]
 type = "eql"
 
 query = '''

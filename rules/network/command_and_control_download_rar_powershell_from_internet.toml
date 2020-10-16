@@ -30,7 +30,7 @@ references = [
 risk_score = 47
 rule_id = "ff013cb4-274d-434a-96bb-fe15ddd3ae92"
 severity = "medium"
-tags = ["Elastic", "Network", "Advanced Threat Detection", "Command and Control"]
+tags = ["Elastic", "Network", "Threat Detection", "Command and Control"]
 type = "query"
 
 query = '''

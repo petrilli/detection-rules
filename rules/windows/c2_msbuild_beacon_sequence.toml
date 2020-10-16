@@ -18,7 +18,7 @@ name = "MsBuild Network Connection Sequence"
 risk_score = 21
 rule_id = "9dc6ed5d-62a9-4feb-a903-fafa1d33b8e9"
 severity = "medium"
-tags = ["Elastic", "Host", "Windows", "Advanced Threat Detection", "Defense Evasion"]
+tags = ["Elastic", "Host", "Windows", "Threat Detection", "Defense Evasion"]
 type = "eql"
 
 query = '''

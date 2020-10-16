@@ -18,7 +18,7 @@ name = "InstallUtil Process Making Network Connections"
 risk_score = 21
 rule_id = "a13167f1-eec2-4015-9631-1fee60406dcf"
 severity = "medium"
-tags = ["Elastic", "Host", "Windows", "Advanced Threat Detection", "Defense Evasion"]
+tags = ["Elastic", "Host", "Windows", "Threat Detection", "Defense Evasion"]
 type = "eql"
 
 query = '''
