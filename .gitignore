@@ -108,3 +108,7 @@ ENV/
 # Siem rules
 releases/
 collections/
+
+# tags conversion script
+cat.py
+output_tags.txt
