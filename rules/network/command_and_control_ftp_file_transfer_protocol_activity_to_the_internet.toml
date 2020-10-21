@@ -29,7 +29,7 @@ name = "FTP (File Transfer Protocol) Activity to the Internet"
 risk_score = 21
 rule_id = "87ec6396-9ac4-4706-bcf0-2ebb22002f43"
 severity = "low"
-tags = ["Elastic", "Network"]
+tags = ["Elastic", "Network", "Threat Detection", "Command and Control"]
 type = "query"
 
 query = '''

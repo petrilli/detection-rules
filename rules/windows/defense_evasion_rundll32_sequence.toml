@@ -18,20 +18,24 @@ name = "Unusual Network Connection Sequence via RunDLL32"
 risk_score = 21
 rule_id = "2b347f66-6739-4ae3-bd94-195036dde8b3"
 severity = "low"
-tags = ["Elastic", "Windows"]
+tags = ["Elastic", "Host", "Windows", "Threat Detection", "Defense Evasion"]
 type = "eql"
 
 query = '''
+/* replace winlog.event_data.OriginalFileName with process.pe.original_file_name once field is available in winlogbeat */
+
 sequence by process.entity_id with maxspan=2h
   [process where event.type in ("start", "process_started") and
-     (process.name == "rundll32.exe" or process.pe.original_file_name == "rundll32.exe") and
+     (process.name == "rundll32.exe" or process.pe.original_file_name == "rundll32.exe" or
+        winlog.event_data.OriginalFileName == "rundll32.exe") and
 
      /* zero arguments excluding the binary itself (and accounting for when the binary may not be logged in args) */
      ((process.args == "rundll32.exe" and process.args_count == 1) or
       (process.args != "rundll32.exe" and process.args_count == 0))]
 
   [network where event.type == "connection" and
-     (process.name == "rundll32.exe" or process.pe.original_file_name == "rundll32.exe")]
+     (process.name == "rundll32.exe" or process.pe.original_file_name == "rundll32.exe" or
+        winlog.event_data.OriginalFileName == "rundll32.exe")]
 '''
 
 
@@ -47,3 +51,4 @@ reference = "https://attack.mitre.org/techniques/T1085/"
 id = "TA0005"
 name = "Defense Evasion"
 reference = "https://attack.mitre.org/tactics/TA0005/"
+

@@ -10,6 +10,7 @@ import sys
 import unittest
 import warnings
 from collections import defaultdict
+from pathlib import Path
 
 import jsonschema
 import kql
@@ -200,7 +201,7 @@ class TestRuleTags(unittest.TestCase):
 
         expected_tags = [
             'APM', 'AWS', 'Asset Visibility', 'Azure', 'Configuration Audit', 'Continuous Monitoring',
-            'Data Protection', 'Elastic', 'Endpoint', 'GCP', 'Identity and Access', 'Linux', 'Logging', 'ML', 'macOS',
+            'Data Protection', 'Elastic', 'Endpoint Security', 'GCP', 'Identity and Access', 'Linux', 'Logging', 'ML', 'macOS',
             'Monitoring', 'Network', 'Okta', 'Packetbeat', 'Post-Execution', 'SecOps', 'Windows'
         ]
         expected_case = {normalize(t): t for t in expected_tags}
@@ -228,9 +229,9 @@ class TestRuleTags(unittest.TestCase):
         required_tags_map = {
             'apm-*-transaction*': {'all': ['APM']},
             'auditbeat-*': {'any': ['Windows', 'macOS', 'Linux']},
-            'endgame-*': {'all': ['Endpoint']},
+            'endgame-*': {'all': ['Endpoint Security']},
             'logs-aws*': {'all': ['AWS']},
-            'logs-endpoint.alerts-*': {'all': ['Endpoint']},
+            'logs-endpoint.alerts-*': {'all': ['Endpoint Security']},
             'logs-endpoint.events.*': {'any': ['Windows', 'macOS', 'Linux']},
             'logs-okta*': {'all': ['Okta']},
             'packetbeat-*': {'all': ['Network']},
@@ -268,3 +269,28 @@ class TestRuleTags(unittest.TestCase):
 
             if missing_required_tags or is_missing_any_tags:
                 self.fail(error_msg)
+
+
+class TestRuleFiles(unittest.TestCase):
+    """Test the expected file names."""
+
+    def test_rule_file_names_by_tactic(self):
+        """Test to ensure rule files have the primary tactic prepended to the filename."""
+        rules = rule_loader.load_rules().values()
+
+        for rule in rules:
+            rule_path = Path(rule.path).resolve()
+            filename = rule_path.name
+
+            if rule_path.parent.name == 'ml':
+                continue
+
+            threat = rule.contents.get('threat', [])
+            authors = rule.contents.get('author', [])
+
+            if threat and 'Elastic' in authors:
+                primary_tactic = threat[0]['tactic']['name']
+                tactic_str = primary_tactic.lower().replace(' ', '_')
+
+                error_msg = 'filename does not start with the primary tactic - update the tactic or the rule filename'
+                self.assertEqual(tactic_str, filename[:len(tactic_str)], f'{rule.id} - {rule.name} -> {error_msg}')
