@@ -19,7 +19,7 @@ name = "Credential Dumping - Prevented - Endpoint Security"
 risk_score = 47
 rule_id = "db8c33a8-03cd-4988-9e2c-d0a4863adb13"
 severity = "medium"
-tags = ["Elastic", "Elastic Endpoint"]
+tags = ["Elastic", "Endpoint Security"]
 type = "query"
 
 query = '''

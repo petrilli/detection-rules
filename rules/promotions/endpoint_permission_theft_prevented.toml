@@ -19,7 +19,7 @@ name = "Permission Theft - Prevented - Endpoint Security"
 risk_score = 47
 rule_id = "453f659e-0429-40b1-bfdb-b6957286e04b"
 severity = "medium"
-tags = ["Elastic", "Elastic Endpoint"]
+tags = ["Elastic", "Endpoint Security"]
 type = "query"
 
 query = '''
