@@ -19,7 +19,7 @@ name = "Credential Manipulation - Prevented - Endpoint Security"
 risk_score = 47
 rule_id = "c9e38e64-3f4c-4bf3-ad48-0e61a60ea1fa"
 severity = "medium"
-tags = ["Elastic", "Endpoint"]
+tags = ["Elastic", "Elastic Endpoint"]
 type = "query"
 
 query = '''

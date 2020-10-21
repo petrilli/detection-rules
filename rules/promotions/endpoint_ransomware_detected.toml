@@ -19,7 +19,7 @@ name = "Ransomware - Detected - Endpoint Security"
 risk_score = 99
 rule_id = "8cb4f625-7743-4dfb-ae1b-ad92be9df7bd"
 severity = "critical"
-tags = ["Elastic", "Endpoint"]
+tags = ["Elastic", "Elastic Endpoint"]
 type = "query"
 
 query = '''
